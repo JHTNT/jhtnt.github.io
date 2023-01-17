@@ -11,9 +11,10 @@ h4 {
     font-size: 1.17rem;
 }
 
-/* 半透明背景 */
 [data-theme='dark'] {
-    --card-bg: rgba(0, 0, 0, 0.2);
+    --card-bg: rgba(0, 0, 0, 0.2);  /* 半透明背景 */
+    --scrollbar-color: #49b1f5;
+    --default-bg-color: #000000;
 }
 
 /* dark mode 的背景的亮度 */
