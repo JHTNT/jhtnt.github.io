@@ -1,0 +1,414 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>從 Jekyll 到 Hexo | JHTNT Blog</title><meta name="author" content="JHTNT"><meta name="copyright" content="JHTNT"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言 原本 Jekyll 使用的是 Layon 主題，想著一開始用極簡主題就好，有需要什麼功能再額外加上去。結果東加西加，網站的程式碼變得很雜亂，不如直接換一個主題。 後來想起之前看過朋友用 Hexo 架的網站看起來滿漂亮的，可以調整的設定不少，也支援 Markdown。因此打算從 Jekyll 轉"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://jhtnt.github.io/posts/Jekyll-to-Hexo/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查詢的內容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: false,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '從 Jekyll 到 Hexo',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-21 15:53:27'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/vscode_dark_theme.css"><meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.imgur.com/cBOtjyB.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章總覽</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="JHTNT Blog"><span class="site-name">JHTNT Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜尋</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章總覽</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">從 Jekyll 到 Hexo</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-01-11T14:50:43.000Z" title="發表於 2023-01-11 22:50:43">2023-01-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-01-21T07:53:27.000Z" title="更新於 2023-01-21 15:53:27">2023-01-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9E%B6%E7%AB%99%E7%AD%86%E8%A8%98/">架站筆記</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字數總計:</span><span class="word-count">3.2k</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<p>原本 Jekyll 使用的是 <a target="_blank" rel="noopener" href="https://github.com/poole/lanyon">Layon</a> 主題，想著一開始用極簡主題就好，有需要什麼功能再額外加上去。結果東加西加，網站的程式碼變得很雜亂，不如直接換一個主題。</p>
+<p>後來想起之前看過朋友用 <a target="_blank" rel="noopener" href="https://hexo.io/zh-tw/">Hexo</a> 架的網站看起來滿漂亮的，可以調整的設定不少，也支援 Markdown。因此打算從 Jekyll 轉換到 Hexo，同時作為一個新的開始。</p>
+<div class="note info flat"><p>以下內容主要參考官方文檔，記錄自己安裝及配置的過程，Butterfly 相關配置在官方文檔都有詳盡的說明，此篇文章只紀錄部分較特別的設定。</p>
+</div>
+<h2 id="安裝">安裝</h2>
+<p>安裝 Hexo 前需要先安裝 <a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> （核心部分） 與 git （用於推送網頁）。</p>
+<p>有了 Node.js 後就可以在終端機執行安裝指令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>建立一個資料夾作為 blog 的根目錄，進入該目錄後配置基本檔案：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> <span class="token operator">&lt;</span>folder<span class="token operator">></span>
+hexo init
+<span class="token function">npm</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>安裝完後資料夾內的結構應該會長這樣：</p>
+<pre class="line-numbers language-none"><code class="language-none">.
+├── _config.yml
+├── package.json
+├── scaffolds
+├── source
+|   ├── _drafts
+|   └── _posts
+└── themes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>此時基本配置就完成了。</p>
+<h2 id="選擇主題">選擇主題</h2>
+<p>第一件事當然是要選擇一個順眼的主題，預設的主題是 <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT</a>，我選擇的是 <a target="_blank" rel="noopener" href="https://butterfly.js.org/">Butterfly</a> 主題。除了好看以外，它的官方文檔還是<strong>中文</strong>的，對我這種英文苦手的人來說非常友好。</p>
+<div class="note warning flat"><p>由於不同主題的配置不盡相同，因此更換主題時可能無法完美轉移。</p>
+</div>
+<p>安裝過程可直接參考 butterfly 的<a target="_blank" rel="noopener" href="https://butterfly.js.org/posts/21cfbf15/">官方教學</a>。</p>
+<h2 id="開始寫文章">開始寫文章</h2>
+<p>在根目錄中輸入以下指令會自動在 <code>source/_posts/</code> 建立一個新的 Markdown 檔案：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new <span class="token punctuation">[</span>layout<span class="token punctuation">]</span> <span class="token operator">&lt;</span>title<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>layout 就是文章的初始佈局，存放在 <code>scaffholds</code> 資料夾中。以 <code>post.md</code> 為例，打開可以看到</p>
+<pre class="line-numbers language-markdown" data-language="markdown"><div class="caption"><span>post.md</span></div><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
+<span class="token front-matter yaml language-yaml">title: &#123;&#123; title &#125;&#125;
+date: &#123;&#123; date &#125;&#125;
+tag:</span>
+<span class="token punctuation">---</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>這個以 <code>---</code> 分隔的區塊可以當作是個別頁面的設定檔，以下是常用的變數：</p>
+<ul>
+<li><code>title</code> 標題 （預設為檔名）</li>
+<li><code>data</code> 檔案建立日期</li>
+<li><code>updated</code> 檔案修改日期</li>
+<li><code>tags</code> 標籤</li>
+<li><code>categories</code> 分類</li>
+</ul>
+<h3 id="分類與標籤">分類與標籤</h3>
+<p>在 Hexo 中，分類的順序代表階層性，標籤則沒有差別。例如分類 <code>Foo, Bar</code> 表示文章屬於 Foo 分類下的 Bar 分類，一個頁面可以同時擁有<strong>多個分類與標籤</strong>：</p>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">categories:
+    <span class="token list punctuation">-</span> [Sports, Baseball]
+    <span class="token list punctuation">-</span> Diary
+tags:
+    <span class="token list punctuation">-</span> Injury
+    <span class="token list punctuation">-</span> Shocking<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="修改預設檔案名稱">修改預設檔案名稱</h3>
+<p>當文章數量逐漸增加時，全部塞在同一個資料夾找起來會很困難，因此想找一個能照年份分類的方法。</p>
+<p>如果直接在 <code>source/_posts/2023</code> 裡建立文章，預設產生的文章連結會是 <code>https://jhtnt.github.io/2023/01/11/title</code>。如果想讓文章連結只有標題，例如 <code>https://jhtnt.github.io/posts/title</code>，可以如下修改 <code>_config.yml</code> 的配置。</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><div class="caption"><span>_config.yml</span></div><code class="language-yaml"><span class="token key atrule">permalink</span><span class="token punctuation">:</span> posts/<span class="token punctuation">:</span>name/
+<span class="token key atrule">new_post_name</span><span class="token punctuation">:</span> <span class="token punctuation">:</span>year/<span class="token punctuation">:</span>title.md<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><code>permalink</code> 指的是文章的永久連結，<code>new_post_name</code> 則是使用指令新增文章時產生的檔名，以下是幾個常用的變數：</p>
+<ul>
+<li><code>:title</code> 文章標題</li>
+<li><code>:name</code> 文章<strong>檔名</strong></li>
+<li><code>:year</code> 文章建立年分 （4 位數）</li>
+<li><code>:month</code> 文章建立月分 （2 位數）</li>
+<li><code>:day</code> 文章建立日期 （2 位數）</li>
+</ul>
+<h2 id="本地預覽">本地預覽</h2>
+<p>有時我們會需要在正式部署前預覽網頁，這時可以使用 Hexo 的指令。</p>
+<h3 id="generate">generate</h3>
+<p>輸入 <code>hexo generate</code> 或 <code>hexo g</code> 可以生成靜態檔案，加上 <code>-w</code> 或 <code>--watch</code> 可以持續監看並即時生成檔案。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo generate
+hexo g <span class="token parameter variable">-w</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="serve">serve</h3>
+<p><code>hexo server</code> 或 <code>hexo s</code> 可以啟動本機伺服器，預設 port 為 <code>http://localhost:4000/</code>。若與其他應用程式的 port 衝突，可以使用 <code>-p</code> 或 <code>--port</code> 來自訂 port。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo serve
+hexo s <span class="token parameter variable">-p</span> <span class="token number">4001</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>在 server 啟動期間會持續監測檔案，效果與 <code>hexo g -w</code> 相同。不過似乎與 Jekyll 一樣只會監測 <code>source/</code> 裡的資源，若更改了 <code>_config.yml</code> 等檔案需要重新啟動伺服器才會生效。</p>
+<h3 id="clean">clean</h3>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo clean<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>可以清理快取檔案 (<code>db.json</code>) 和已產生的靜態檔案 (<code>public/</code>)。</p>
+<div class="note info flat"><p>若不需要下面的設定，想要直接部署，可跳至 <a href="#%E9%83%A8%E7%BD%B2%E5%88%B0-github-pages">部署到 GitHub Pages</a></p>
+</div>
+<h2 id="自訂漸層背景">自訂漸層背景</h2>
+<p>在 <code>_config.butterfly.yml</code> 中有一項設定是 <code>background</code>，可以設定網站的背景，研究後發現可以使用漸層顏色，於是在 <a target="_blank" rel="noopener" href="https://webgradients.com/">WebGradients</a> 找了一個喜歡的顏色貼進設定裡：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><div class="caption"><span>_config.butterfly.yml</span></div><code class="language-yaml"><span class="token key atrule">background</span><span class="token punctuation">:</span> <span class="token string">"linear-gradient(120deg, #fbc2eb 0%, #a6c1ee 100%)"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>但當我切換成暗色模式後馬上發現不對勁，由於這個主題的暗色模式會對所有顏色加上一層透明度 70% 的黑色，雖然能減少亮度的刺激，卻導致原本的漸層變得很奇怪，於是我決定寫一個 CSS 檔案覆蓋主題的設定。</p>
+<h3 id="新增自訂-css-檔案">新增自訂 CSS 檔案</h3>
+<p>為了避免在更新主題時意外覆蓋掉自訂的檔案，將檔案放在根目錄的 <code>source/</code> 而不是主題目錄的 <code>source/</code> 會是比較好的選擇。</p>
+<p>首先在建立一個存放 CSS 的資料夾 <code>source/css/</code> 在裡面建立 <code>custom.css</code> （檔名沒有限制）。然後進入 <code>_config.butterfly.yml</code> 找到 <code>inject</code> 並修改 （有兩個不同的 <code>inject</code>，請看註解辨別）：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><div class="caption"><span>_config.butterfly.yml</span></div><code class="language-yaml"><span class="token comment"># Inject</span>
+<span class="token comment"># Insert the code to head (before '&lt;/head>' tag) and the bottom (before '&lt;/body>' tag)</span>
+<span class="token comment"># 插入代碼到頭部 &lt;/head> 之前 和 底部 &lt;/body> 之前</span>
+<span class="token key atrule">inject</span><span class="token punctuation">:</span>
+  <span class="token key atrule">head</span><span class="token punctuation">:</span>
+    <span class="token comment"># - &lt;link rel="stylesheet" href="/xxx.css"></span>
+    <span class="token punctuation">-</span> &lt;link rel="stylesheet" href="/css/custom.css"<span class="token punctuation">></span>
+  <span class="token key atrule">bottom</span><span class="token punctuation">:</span>
+    <span class="token comment"># - &lt;script src="xxxx">&lt;/script></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>這樣就會在每個頁面的 <code>&lt;head&gt;</code> 導入這個檔案。</p>
+<h3 id="修改背景顏色">修改背景顏色</h3>
+<p>說回剛剛的背景顏色，找了很久發現是受下面這段 CSS 影響，最終我把透明度調成 <strong>50%</strong>，在不會過亮的情況下還不至於太奇怪。</p>
+<pre class="line-numbers language-css" data-language="css"><div class="caption"><span>custom.css</span></div><code class="language-css"><span class="token selector">[data-theme='dark'] #web_bg:before</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0.5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>改完之後又出現一個問題，文章內部的背景還是黑色的，看起來有點突兀，於是讓它變成有點半透明的效果：</p>
+<pre class="line-numbers language-css" data-language="css"><div class="caption"><span>custom.css</span></div><code class="language-css"><span class="token selector">#recent-posts>.recent-post-item</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0.15<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.layout>#post</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0.15<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">#aside-content .card-widget</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0.15<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最後將 footer 變成透明的就成功讓整體顏色一致了：</p>
+<pre class="line-numbers language-css" data-language="css"><div class="caption"><span>custom.css</span></div><code class="language-css"><span class="token selector">#footer</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">[data-theme='dark'] #footer:before</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="自訂程式碼-highlight-主題">自訂程式碼 highlight 主題</h2>
+<p>Hexo 內建提供 highlight.js 與 Prism.js 兩種 highlight 方式，預設是使用 highlight.js。但是 Prism.js 對程式碼的分割更加<strong>細緻</strong>，因此我想改用 Prism.js 順便修改配色。</p>
+<p>首先關閉 <code>highlight</code> 並開啟 <code>prismjs</code>：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><div class="caption"><span>_config.yml</span></div><code class="language-yaml"><span class="token key atrule">highlight</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+<span class="token key atrule">prismjs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>之後在 <code>source/css/</code> 建立一個 CSS 檔案用於存放 highlight 配色，在這個 <a target="_blank" rel="noopener" href="https://github.com/PrismJS/prism-themes">github repo</a> 有許多可用於 prismjs 的主題，我選擇的是 <strong>VS Code Dark+</strong>。接著將你要的主題的 CSS 複製到剛才建立的檔案，並在開頭插入這段 code （<code>xxxxxxx</code>） 表示預設顏色：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token comment">/* 新添加的內容
+  ------------------------------------- 
+  --hl-color                  代碼框字體顔色 【必須】 (把下面.hljs的 color複製到這裏來)
+  --hl-bg                     代碼框背景色 【必須】 (把下面.hljs的 background複製到這裏來)
+  --hltools-bg: #321a0f       代碼框頂部工具欄背景色 【可選】(如果你關掉了 copy、lang 和 shrink,可不用配置這個）
+  --hltools-color: #fff       代碼框頂部工具欄字體顔色 【可選】(如果你關掉了 copy、lang 和 shrink,可不用配置這個）
+  --hlnumber-bg: #221a0f      代碼框行數背景色 【可選】(如果已經關掉 line_number,可以不用配置這個)
+  --hlnumber-color: #fff      代碼框行數字體顔色 【可選】 (如果已經關掉 line_number,可以不用配置這個)
+  --hlscrollbar-bg: #d3af86   代碼框滾動條顔色 【可選】（默認為主題主顔色）
+  --hlexpand-bg: #d3af86      代碼框底部展開背景色 【可選】(如果已經關掉 highlight_height_limit,可以不用配置這個)
+*/</span>
+
+<span class="token selector">:root</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">--hl-color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+    <span class="token property">--hl-bg</span><span class="token punctuation">:</span> #1e1e1e<span class="token punctuation">;</span>
+    <span class="token property">--hltools-bg</span><span class="token punctuation">:</span> xxxxxxx<span class="token punctuation">;</span>
+    <span class="token property">--hltools-color</span><span class="token punctuation">:</span> xxxxxxx<span class="token punctuation">;</span>
+    <span class="token property">--hlnumber-bg</span><span class="token punctuation">:</span> xxxxxxx<span class="token punctuation">;</span>
+    <span class="token property">--hlnumber-color</span><span class="token punctuation">:</span> xxxxxxxx<span class="token punctuation">;</span>
+    <span class="token property">--hlscrollbar-bg</span><span class="token punctuation">:</span> xxxxx<span class="token punctuation">;</span>
+    <span class="token property">--hlexpand-bg</span><span class="token punctuation">:</span> xxxxxxx<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/* 下面是你所選的配色主題的 CSS */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最後設定好此檔案的 <code>inject</code> 就大功告成了。</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><div class="caption"><span>_config.butterfly.yml</span></div><code class="language-yaml"><span class="token key atrule">inject</span><span class="token punctuation">:</span>
+  <span class="token key atrule">head</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> &lt;link rel="stylesheet" href="/css/vscode_dark_theme.css"<span class="token punctuation">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="增加評論系統">增加評論系統</h2>
+<p>我所選擇的系統是 Waline，主要原因是風格比較符合我的喜好，且可以匿名留言。部署過程不算太難，<a target="_blank" rel="noopener" href="https://waline.js.org/guide/get-started">官方文檔</a>有詳盡的教學，此處只簡略描述：</p>
+<h3 id="建立資料庫">建立資料庫</h3>
+<div class="note warning flat"><p>我使用的資料庫是 MongoDB Atlas，並非 Waline 推薦的 LeanCloud，建立資料庫與下面的變數設定見<a target="_blank" rel="noopener" href="https://candinya.com/posts/migrate-from-disqus-to-waline/">這篇文章</a>，除了 UI 有些許不同外其餘照著做即可。</p>
+</div>
+<h3 id="部署-vercel">部署 Vercel</h3>
+<p>使用 Waline 文檔提供的連結進入 Vercel 頁面，登入 github 後依照步驟進行第一次部署。然後進入 Setting -&gt; Environment Variables 設定環境變數 （不同資料庫需要設定的環境變數不一樣）。</p>
+<p>最後重新部署後取得 server 端位址，若沒有做額外設定連結應為 <code>https://xxxxx.vercel.app</code>，可以先隨意發一則評論測試是否設定成功。</p>
+<h3 id="開啟-hexo-評論設定">開啟 Hexo 評論設定</h3>
+<p>先指定使用 Waline，開啟 lazyload 則使用者滾動到評論位置時才會開始加載：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><div class="caption"><span>_config.butterfly.yml</span></div><code class="language-yaml"><span class="token key atrule">comments</span><span class="token punctuation">:</span>
+  <span class="token key atrule">use</span><span class="token punctuation">:</span> Waline
+  <span class="token key atrule">lazyload</span><span class="token punctuation">:</span> <span class="token boolean important">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>再來設定 Waline，除了 Butterfly 主題提供的幾個選項外，可以在 <code>option</code> 下新增 Waline 的<a target="_blank" rel="noopener" href="https://waline.js.org/reference/client/props.html">自定義選項</a>。</p>
+<div class="note warning flat"><p>需要特別注意在<a target="_blank" rel="noopener" href="https://waline.js.org/cookbook/customize/locale.html">自定义语言</a>這頁的選項都屬於 <code>locale</code> 的子選項，寫法可參考下方的範例。<br>
+<s>（發現選項沒有生效，研究了好幾個小時才發現原因）</s></p>
+</div>
+<pre class="line-numbers language-yaml" data-language="yaml"><div class="caption"><span>_config.butterfly.yml</span></div><code class="language-yaml"><span class="token key atrule">waline</span><span class="token punctuation">:</span>
+  <span class="token key atrule">serverURL</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//xxxxx.vercel.app
+  <span class="token key atrule">option</span><span class="token punctuation">:</span>
+    <span class="token key atrule">locale</span><span class="token punctuation">:</span>
+      <span class="token key atrule">locale</span><span class="token punctuation">:</span>
+      <span class="token key atrule">mail</span><span class="token punctuation">:</span> 電子信箱
+      <span class="token key atrule">placeholder</span><span class="token punctuation">:</span> 有任何問題或建議歡迎留言提出 <span class="token comment"># 評論框默認文字</span>
+      <span class="token key atrule">sofa</span><span class="token punctuation">:</span> 暫無留言 <span class="token comment"># 評論區為空時的顯示文字</span>
+    <span class="token key atrule">imageUploader</span><span class="token punctuation">:</span> <span class="token boolean important">false</span> <span class="token comment"># 上傳圖片功能</span>
+    <span class="token key atrule">search</span><span class="token punctuation">:</span> <span class="token boolean important">false</span> <span class="token comment"># 搜尋 gif 功能</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>這樣就設置完成了。</p>
+<h2 id="渲染-katex">渲染 KaTeX</h2>
+<p>一開始我使用了官方提供的<a target="_blank" rel="noopener" href="https://butterfly.js.org/posts/ceeb73f/#Math-%E6%95%B8%E5%AD%B8">方法</a>，然而 <code>hexo-renderer-markdown-it</code> 無法成功渲染，而 <code>hexo-renderer-markdown-it-plus</code> 雖然成功了，但沒辦法顯示斜體感覺怪怪的。</p>
+<p>最後我找到了<a target="_blank" rel="noopener" href="https://www.nickxu.top/2022/04/17/Hexo-Butterfly-%E5%BB%BA%E7%AB%99%E6%8C%87%E5%8D%97%EF%BC%88%E5%85%AB%EF%BC%89%E4%BD%BF%E7%94%A8-KaTeX-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">這篇文章</a>，安裝 <a target="_blank" rel="noopener" href="https://github.com/Abreto/hexo-renderer-markdown-it-katex"><code>hexo-renderer-markdown-it-katex</code></a> 後不需要額外設定即可渲染 KaTeX：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> un hexo-renderer-marked <span class="token parameter variable">--save</span> <span class="token comment"># 移除原本的渲染插件</span>
+<span class="token function">npm</span> i hexo-renderer-markdown-it-katex <span class="token parameter variable">--save</span> <span class="token comment"># 安裝新插件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>KaTex 測試：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><mi>a</mi><mi>n</mi><mo>+</mo><mi>d</mi><mo>⋅</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac></mstyle></mrow><annotation encoding="application/x-tex">S_{n} = an + d \cdot {\cfrac{n(n-1)}{2}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.276em;vertical-align:-0.686em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5899999999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.74em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span></span></span></span></span></span></span></p>
+<h2 id="增加搜尋系統">增加搜尋系統</h2>
+<p>實際過程比想像中簡單，若只採用預設設定，只需要安裝 <code>hexo-generator-search</code>，並啟用搜尋功能即可。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-generator-search <span class="token parameter variable">--save</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-yaml" data-language="yaml"><div class="caption"><span>_config.butterfly.yml</span></div><code class="language-yaml"><span class="token key atrule">local_search</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="部署到-github-pages">部署到 GitHub Pages</h2>
+<p>終於將網站都布置好後，就可以準備部署到 github 上了。</p>
+<p>首先在 github 上建立一個 repository，名稱<strong>必須</strong>為 <code>&lt;你的 username&gt;.github.io</code> （全小寫）。</p>
+<p>要部署到 github 有兩種方式：</p>
+<ul>
+<li>GitHub Actions</li>
+<li><code>hexo-deployer-git</code> 插件</li>
+</ul>
+<p>這裡我選擇比較方便使用的後者，首先安裝此插件：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git <span class="token parameter variable">--save</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>再來進行 <code>deploy</code> 的設定，注意 <code>url</code> 最後面不要有 <code>/</code>，<code>repo</code> 的部分，如果你的 username 包含大寫，不需要轉成小寫。</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><div class="caption"><span>_config.yml</span></div><code class="language-yaml"><span class="token key atrule">url</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//&lt;你的小寫 username<span class="token punctuation">></span>.github.io <span class="token comment"># 約在 16 行</span>
+
+<span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> git
+  <span class="token key atrule">repo</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//github.com/&lt;你的完整 username<span class="token punctuation">></span>/&lt;剛剛建立的 repository 名稱<span class="token punctuation">></span>.git
+  <span class="token key atrule">branch</span><span class="token punctuation">:</span> gh<span class="token punctuation">-</span>pages<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最後每次部署前輸入以下指令即可：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo clean
+hexo generate
+hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<div class="note info flat"><p>關於進階的部署（自動修改最後編輯時間）可以參考<a href="../Hexo-auto-modify-updated-time-when-deploy">這篇文章</a>。</p>
+</div>
+<h3 id="另存原始檔案">另存原始檔案</h3>
+<p>由於 Hexo 部署時所產生的是最終的 html 等檔案，若需要在其他電腦編輯，還是使用原始檔案更方便，因此建議另外開一個 repository 儲存新檔案。</p>
+<p>首先在根目錄初始化 git：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然後連結到新的 repository，在 github 頁面可以找到類似下方的指令，在根目錄執行即可連結到 repository：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token function">add</span> origin https://github.com/<span class="token operator">&lt;</span>username<span class="token operator">></span>/<span class="token operator">&lt;</span>新 repo 名稱<span class="token operator">></span>.git
+<span class="token function">git</span> branch <span class="token parameter variable">-M</span> main
+<span class="token function">git</span> push <span class="token parameter variable">-u</span> origin main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="雜項">雜項</h2>
+<p>此處為直接更改到主題檔案的部分，升級後需要重新修改。</p>
+<div class="note warning flat"><p>在更新主題時，需要先將檔案復原再 pull 新版本的主題：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> .<span class="token punctuation">\</span>themes<span class="token punctuation">\</span>butterfly<span class="token punctuation">\</span>
+<span class="token function">git</span> reset HEAD <span class="token parameter variable">--hard</span>
+<span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</div>
+<ul>
+<li>
+<p>取消當滑鼠放到頭像上會旋轉一圈<br>
+<a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly/discussions/878">link</a></p>
+<pre class="line-numbers language-stylus" data-language="stylus"><div class="caption"><span>aside.styl</span></div><code class="language-stylus">&amp;<span class="token punctuation">:</span>hover
+<span class="token property-declaration"><span class="token property">transform</span><span class="token punctuation">:</span> <span class="token func"><span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">360</span><span class="token unit">deg</span><span class="token punctuation">)</span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-tw/docs/">文件 | Hexo</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20119486/ironman/2944">試著學 Hexo :: 第 12 屆 iThome 鐵人賽</a></li>
+<li><a target="_blank" rel="noopener" href="https://butterfly.js.org/posts/21cfbf15/">Butterfly 安裝文檔(一) 快速開始 | Butterfly</a></li>
+<li><a target="_blank" rel="noopener" href="https://prinsss.github.io/hexo-posts-in-subfolder/">使用子文件夹管理 Hexo 文章且不改变文章永久链接 - PRIN BLOG</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.imzjw.cn/posts/b74f504f/">关于我 Butterfly 主题的所有美化</a></li>
+<li><a target="_blank" rel="noopener" href="https://butterfly.js.org/posts/b37b5fe3/">自定義代碼配色 | Butterfly</a></li>
+<li><a target="_blank" rel="noopener" href="https://candinya.com/posts/migrate-from-disqus-to-waline/">从Disqus迁移到Waline | 糖菓·部落</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/JHTNT">JHTNT</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章連結: </span><span class="post-copyright-info"><a href="https://jhtnt.github.io/posts/Jekyll-to-Hexo/">https://jhtnt.github.io/posts/Jekyll-to-Hexo/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://jhtnt.github.io" target="_blank">JHTNT Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/Jekyll/">Jekyll</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/Hexo-syntax/" title="Hexo 常用語法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hexo 常用語法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/posts/Hexo-auto-modify-updated-time-when-deploy/" title="在 Hexo 部署時自動更新文章的編輯時間"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-18</div><div class="title">在 Hexo 部署時自動更新文章的編輯時間</div></div></a></div><div><a href="/posts/Hexo-syntax/" title="Hexo 常用語法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-12</div><div class="title">Hexo 常用語法</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 評論</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%9D"><span class="toc-number">2.</span> <span class="toc-text">安裝</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%B8%E6%93%87%E4%B8%BB%E9%A1%8C"><span class="toc-number">3.</span> <span class="toc-text">選擇主題</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%96%8B%E5%A7%8B%E5%AF%AB%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">開始寫文章</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%A1%9E%E8%88%87%E6%A8%99%E7%B1%A4"><span class="toc-number">4.1.</span> <span class="toc-text">分類與標籤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%A0%90%E8%A8%AD%E6%AA%94%E6%A1%88%E5%90%8D%E7%A8%B1"><span class="toc-number">4.2.</span> <span class="toc-text">修改預設檔案名稱</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E9%A0%90%E8%A6%BD"><span class="toc-number">5.</span> <span class="toc-text">本地預覽</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#generate"><span class="toc-number">5.1.</span> <span class="toc-text">generate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#serve"><span class="toc-number">5.2.</span> <span class="toc-text">serve</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clean"><span class="toc-number">5.3.</span> <span class="toc-text">clean</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E8%A8%82%E6%BC%B8%E5%B1%A4%E8%83%8C%E6%99%AF"><span class="toc-number">6.</span> <span class="toc-text">自訂漸層背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E8%87%AA%E8%A8%82-css-%E6%AA%94%E6%A1%88"><span class="toc-number">6.1.</span> <span class="toc-text">新增自訂 CSS 檔案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%83%8C%E6%99%AF%E9%A1%8F%E8%89%B2"><span class="toc-number">6.2.</span> <span class="toc-text">修改背景顏色</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E8%A8%82%E7%A8%8B%E5%BC%8F%E7%A2%BC-highlight-%E4%B8%BB%E9%A1%8C"><span class="toc-number">7.</span> <span class="toc-text">自訂程式碼 highlight 主題</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1"><span class="toc-number">8.</span> <span class="toc-text">增加評論系統</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E8%B3%87%E6%96%99%E5%BA%AB"><span class="toc-number">8.1.</span> <span class="toc-text">建立資料庫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2-vercel"><span class="toc-number">8.2.</span> <span class="toc-text">部署 Vercel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%96%8B%E5%95%9F-hexo-%E8%A9%95%E8%AB%96%E8%A8%AD%E5%AE%9A"><span class="toc-number">8.3.</span> <span class="toc-text">開啟 Hexo 評論設定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93-katex"><span class="toc-number">9.</span> <span class="toc-text">渲染 KaTeX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E6%90%9C%E5%B0%8B%E7%B3%BB%E7%B5%B1"><span class="toc-number">10.</span> <span class="toc-text">增加搜尋系統</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0-github-pages"><span class="toc-number">11.</span> <span class="toc-text">部署到 GitHub Pages</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A6%E5%AD%98%E5%8E%9F%E5%A7%8B%E6%AA%94%E6%A1%88"><span class="toc-number">11.1.</span> <span class="toc-text">另存原始檔案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%9C%E9%A0%85"><span class="toc-number">12.</span> <span class="toc-text">雜項</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-number">13.</span> <span class="toc-text">Reference</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By JHTNT</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直達評論"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜尋</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  資料庫載入中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜尋文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://jhtnt-blog-comment-i1sfhr5gp-jhtnt.vercel.app/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, {"locale":{"mail":"電子信箱","placeholder":"有任何問題或建議歡迎留言提出","sofa":"暫無評論"},"imageUploader":false,"search":false,"emoji":false}))
+  }
+
+  if (typeof Waline === 'object') initWaline()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div></div></body></html>

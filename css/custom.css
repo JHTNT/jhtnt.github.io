@@ -1,0 +1,84 @@
+/* 標題大小 */
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.17rem;
+}
+
+table {
+    display: block;
+}
+
+[data-theme='dark'] {
+    --card-bg: rgba(0, 0, 0, 0.2);  /* 半透明背景 */
+    --scrollbar-color: #49b1f5;
+    --default-bg-color: #000000;
+}
+
+/* dark mode 的背景的亮度 */
+[data-theme='dark'] #web_bg:before {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 調整圖片暗化 */
+[data-theme='dark'] img {
+    filter: brightness(0.85);
+}
+
+/* 調整筆記欄明暗 */
+[data-theme='dark'] .note {
+    filter: brightness(0.9);
+}
+
+/* 程式碼框的背景顏色 */
+[data-theme='dark'] #article-container pre > code {
+    background: #1e1e1e;
+}
+
+/* 文章行內程式碼背景 */
+[data-theme='dark'] #article-container code {
+    background: #242424;
+    border-radius: 5px;
+}
+
+#article-container code {
+    color: #fe9286;
+}
+
+#article-container pre[class*='language-'] .caption {
+    color: #858585;
+}
+
+/* 文章目錄 */
+#card-toc {
+    font-size: 14px;
+}
+
+/* 首頁文章區塊 */
+#recent-posts > .recent-post-item {
+    height: 8em;
+}
+
+/* 讓 footer 變成透明 */
+#footer {
+    background: rgba(0, 0, 0, 0);
+}
+
+[data-theme='dark'] #footer:before {
+    background: rgba(0, 0, 0, 0);
+}
+
+/* 強制統一標籤頁面的顏色 */
+.tag-cloud-list>a {
+    color: #99a9bf !important;
+}
+
+strong {
+    background: linear-gradient(transparent 60%, #48fe7973 0%);
+}
