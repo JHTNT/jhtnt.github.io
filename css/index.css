@@ -210,7 +210,6 @@ template {
   -webkit-box-orient: vertical;
 }
 .fontawesomeIcon,
-hr:before,
 #post .post-copyright:before,
 #post .post-outdate-notice:before,
 .note:not(.no-icon)::before {
@@ -1300,7 +1299,7 @@ body {
   background: var(--global-bg);
   color: var(--font-color);
   font-size: var(--global-font-size);
-  font-family: Roboto, "Noto Sans", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   line-height: 2;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -1364,25 +1363,6 @@ hr {
   position: relative;
   margin: 40px auto;
   border: 2px dashed var(--hr-border);
-  width: calc(100% - 4px);
-}
-hr:hover:before {
-  left: calc(95% - 20px);
-}
-hr:before {
-  position: absolute;
-  top: -10px;
-  left: 5%;
-  z-index: 1;
-  color: var(--hr-before-color);
-  content: '\f0c4';
-  font-size: 20px;
-  line-height: 1;
-  -webkit-transition: all 1s ease-in-out;
-  -moz-transition: all 1s ease-in-out;
-  -o-transition: all 1s ease-in-out;
-  -ms-transition: all 1s ease-in-out;
-  transition: all 1s ease-in-out;
 }
 .table-wrap {
   overflow-x: scroll;
@@ -3709,7 +3689,7 @@ h1.page-title + .tag-cloud-list {
   overflow-wrap: break-word;
 }
 #article-container a {
-  color: #49b1f5;
+  color: #00c4b6;
 }
 #article-container a:hover {
   text-decoration: underline;
