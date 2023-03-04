@@ -26,6 +26,16 @@ table {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* 調整圖片暗化 */
+[data-theme='dark'] img {
+    filter: brightness(0.85);
+}
+
+/* 調整筆記欄明暗 */
+[data-theme='dark'] .note {
+    filter: brightness(0.9);
+}
+
 /* 程式碼框的背景顏色 */
 [data-theme='dark'] #article-container pre > code {
     background: #1e1e1e;
