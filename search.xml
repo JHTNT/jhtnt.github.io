@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Ubuntu 22.04 出現 Daemons using outdated libraries 提示</title>
+      <link href="/posts/Ubuntu-Daemons-using-outdated-libraries/"/>
+      <url>/posts/Ubuntu-Daemons-using-outdated-libraries/</url>
+      
+        <content type="html"><![CDATA[<p>在使用 <code>apt</code> 安裝套件時，突然跳出一個視窗，寫著 <code>Daemons using outdated libraries</code>，不太敢動就先取消了。</p><p>查了一下發現是新版本的 Ubuntu 會在 <code>apt</code> 更新完套件後執行 <code>needrestart</code> 這個指令，用於告知有哪些服務需要<strong>重新啟動</strong>。預設行為就是打開這個互動式的介面。若使用腳本執行 <code>apt</code> 指令，跳出這個介面可能會導致腳本中斷。</p><p><img src="../../img/2023/Ubuntu-Daemons-using-outdated-libraries/Daemons-using-outdated-libraries.png" alt="Daemons using outdated libraries"></p><h2 id="解決方法">解決方法</h2><p>最極端的方法是直接移除 <code>needrestart</code> 套件，但這個套件是有用處的，因此我們透過修改設定檔的方式來解決。</p><p>打開 <code>/etc/needrestart/needrestart.conf</code> 這個檔案，其中一段如下：</p><pre class="line-numbers language-conf" data-language="conf"><code class="language-conf"># Restart mode: (l)ist only, (i)nteractive or (a)utomatically.## ATTENTION: If needrestart is configured to run in interactive mode but is run# non-interactive (i.e. unattended-upgrades) it will fallback to list only mode.## $nrconf&#123;restart&#125; &#x3D; &#39;i&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>先將最後一行取消註解，然後把 <code>i</code> 改成 <code>l</code> 或 <code>a</code>（我選擇 <code>a</code> 讓它自動執行重啟），然後存檔再跑一次 <code>needrestart</code> 讓剛剛應該重啟的跑一下。</p><h2 id="reference">Reference</h2><ul><li><a href="https://stackoverflow.com/questions/73397110/how-to-stop-ubuntu-pop-up-daemons-using-outdated-libraries-when-using-apt-to-i">linux - How to stop ubuntu pop-up “Daemons using outdated libraries” when using apt to install or update packages? - Stack Overflow</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 疑難雜症 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>使用 Poetry 管理 Python 套件</title>
       <link href="/posts/Python-Poetry/"/>
       <url>/posts/Python-Poetry/</url>
