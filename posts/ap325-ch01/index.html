@@ -4,7 +4,7 @@
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查詢的內容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '複製成功',
     error: '複製錯誤',
@@ -128,7 +128,9 @@
 <p><a target="_blank" rel="noopener" href="https://github.com/JHTNT/OnlineJudge/tree/master/AP325/Ch01">第一章程式碼</a></p>
 <h2 id="q-1-2-合成函數-2">Q-1-2. 合成函數(2)</h2>
 <p>這題跟 P-1-1 用一樣的方法做就好了。不過我是用 C++ 寫的，因此在 <code>eval()</code> 裡判斷第一個輸入是不是數字的方法不同：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">if</span> (cin &gt;&gt; n &amp;&amp; cin) <span class="keyword">return</span> n;</span><br><span class="line">cin.<span class="built_in">clear</span>();</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> n<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>cin <span class="token operator">>></span> n <span class="token operator">&amp;&amp;</span> cin<span class="token punctuation">)</span> <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+cin<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>首先嘗試進行 cin，若讀取數字失敗，則 failbit 會被設置，此時 <code>if (cin)</code> 會是 false，因此只有當正確讀取數字才會 return n。由於 failbit 被設置時 cin 無法正常運作，因此執行 <code>cin.clear()</code> 清除 failbit 才能正常執行之後的 cin。</p>
 <h2 id="q-1-4-支點切割">Q-1-4. 支點切割</h2>
 <p>這題可以用前綴和 (left prefix sum) 與後綴和 (right prefix sum) 來解。</p>
@@ -210,7 +212,14 @@
 <h2 id="q-1-10-最多得分的皇后">Q-1-10. 最多得分的皇后</h2>
 <p>這題可以用 P-1-9 的遞迴解，需要考慮的部分是<strong>不一定</strong>要放滿 n 個皇后，我用 -1 表示不放，最後計算分數時遇到 -1 不算該格分數（但是這個方法不夠優化）。</p>
 <p>下面是最關鍵的部分，迴圈裡面照一般的解法，結束後追加一個 -1 表示此列不放皇后，<code>res</code> 用於儲存最高的分數。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (valid[i]) &#123;</span><br><span class="line">        p[k] = i;</span><br><span class="line">        res = <span class="built_in">max</span>(res, <span class="built_in">nq</span>(n, k + <span class="number">1</span>, p));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">p[k] = <span class="number">-1</span>;</span><br><span class="line">res = <span class="built_in">max</span>(res, <span class="built_in">nq</span>(n, k + <span class="number">1</span>, p));</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>valid<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        p<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        res <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> <span class="token function">nq</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> k <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+p<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+res <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> <span class="token function">nq</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> k <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="q-1-11-刪除矩形邊界-遞迴">Q-1-11. 刪除矩形邊界 — 遞迴</h2>
 <p>這題可以把矩陣設為全域變數，這樣遞迴函式只需要傳入四個邊界與 cost。直接計算四個邊各自的 cost，再縮減邊界繼續遞迴即可。如果左邊界等於右邊界，或上邊界等於下邊界，表示只剩一行或一列，此時就不用繼續往下遞迴了。</p>
 <h2 id="reference">Reference</h2>
