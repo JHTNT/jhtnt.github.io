@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>在 Cloudflare 把服務遷移到新網域</title>
+      <link href="/posts/migrate-services-to-new-domain-on-cloudflare/"/>
+      <url>/posts/migrate-services-to-new-domain-on-cloudflare/</url>
+      
+        <content type="html"><![CDATA[<p>去年在 namecheap 用 $1.16 的價格買了一年 jhtnt.space 這個網域來玩玩看，但續費要 $25.98 太貴了，剛好我也想換個短一點的頂級域名 (Top-level Domain)。找了一圈發現 Cloudflare 的價格是最穩定公道的（<s>不愧是賽博佛祖</s>），而且我本來就用 Cloudflare 在管理，遷移到新網域很方便。最後用每年 $8.00 的價格買了 <a href="http://jhtnt.cc">jhtnt.cc</a>。</p><div class="note warning flat"><p>我舊網域的 DNS 跟服務已經在 Cloudflare 上設定好了，本文章的目的是簡單快速地遷移到新網域，如果是從零開始請另尋其他教學文章。</p></div><h2 id="dns-record">DNS Record</h2><p>首先要把 DNS record 搬過來，先到舊網域的「DNS -&gt; Records」，在 <strong>Import and Export</strong> 下載下來，然後打開文字編輯器，把舊網域都替換成新網域，並且把 <strong>NS Records</strong> 刪掉（Cloudflare 會自動為新網域分配 name server），然後到新網域同樣位置的 Import and Export 上傳檔案就好。</p><div class="note info flat"><p>如果服務需要指定 CNAME（例如 GitHub Pages），記得也要一起改成新網域才連得到。</p></div><div class="note warning flat"><p>如果 CNAME Records 裡面有 Cloudflare Tunnel 產生的 (address <code>xxx.cfargotunnel.com.</code>)，需要先刪掉這行不直接匯入，否則下一步修改 Hostname 時會因為 CNAME 已經存在導致無法變更。</p><p>或者先做下一個步驟再改 DNS 也行，衝突的 Records 會自動忽略。</p></div><h2 id="cloudflare-tunnel-hostname">Cloudflare Tunnel Hostname</h2><p>進入「Zero Trust -&gt; Networks -&gt; Connectors」，再進入 Tunnel 設置，在 <strong>Published application routes</strong> 選擇要修改的 application routes，將 Hostname 的 Domain 改成新的域名後儲存即可。</p><h2 id="參考連結">參考連結</h2><ul><li><a href="https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/">Import and export records · Cloudflare DNS docs</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技術筆記 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Cloudflare </tag>
+            
+            <tag> Web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>禁止 WSL 加入 Windows 環境變數</title>
       <link href="/posts/prevent-WSL-add-Windows-env/"/>
       <url>/posts/prevent-WSL-add-Windows-env/</url>
