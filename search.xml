@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>透過 Bare Clone 將 GitHub 的 Fork 專案轉為私人</title>
+      <link href="/posts/convert-github-fork-to-private-repo/"/>
+      <url>/posts/convert-github-fork-to-private-repo/</url>
+      
+        <content type="html"><![CDATA[<p>有時候會需要 fork 某個 repository 來進行修改，而 fork 會強制設為公開。若自己修改的版本想轉成 private，但又想獲取原始 repository 的更新，可以使用 bare repository 與新增 remote 來達成。</p><div class="note info flat"><p>本文章以 GitHub 做示範，其他平台的操作同理。</p></div><h2 id="clone-bare-repository">Clone Bare Repository</h2><h3 id="什麼是-bare-repository？">什麼是 Bare Repository？</h3><p>一般的 clone 會把 remote 的檔案下載到工作目錄方便修改，而使用 <code>git clone --bare</code> 只會下載用於版本控制的檔案（平常放在 <code>.git</code> 裡面的檔案），主要用於 server 端避免 push 時衝突，或者用於備份、轉移 repository。</p><div class="note info flat"><p>如果 server (remote) 是 non-bare，則 server 的資料夾會有實際的檔案。<br>當使用者 push 到 server 當前所在的 branch 時，git history 會更新，但工作目錄不會自動 checkout 到新的 commit，就會導致衝突。</p></div><h3 id="clone-指令">Clone 指令</h3><div class="note info flat"><p>若已經 fork 到自己的帳號並做了一些修改，可以先將 repository 暫時改名，用更改後的名字進行以下操作，例如將 <code>example</code> 改為 <code>example1</code>。沒有的話直接 clone 想要 fork 的 repository 即可。</p></div><p>將 bare repository clone 到電腦（任意位置皆可，搬移完成就能刪除此目錄）：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token parameter variable">--bare</span> <span class="token string">"https://github.com/&lt;username>/example1.git"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>此時會出現一個 <code>example1.git</code> 的目錄。</p><h2 id="用-mirror-方式-push-到-github">用 Mirror 方式 Push 到 GitHub</h2><p>先在 GitHub 上建立一個空的 repository（假設叫 <code>example</code>），這就是要 push 的目標。</p><p>接著用 mirror 的方式將原始 repository 的 git 資訊完整複製到這個 repository：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> example1.git<span class="token function">git</span> push <span class="token parameter variable">--mirror</span> https://github.com/<span class="token operator">&lt;</span>username<span class="token operator">></span>/example.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>完成後就能把剛剛 clone 的 <code>example1</code> 刪除了，然後把 <code>example</code> clone 到自己的電腦（不加 <code>--bare</code>）就能開始自己的修改。</p><div class="note info flat"><p>若在電腦已經 clone 過了，可以試試看 <code>git fetch</code> 是否正常運作。</p></div><h2 id="與原始-repository-保持同步">與原始 Repository 保持同步</h2><p>使用上面的方法後，新的 repository 是類似複製一份，而不是 fork。若還想與原始的 repository 同步，獲取最新的 commit，可以把它加到 remote。</p><p>在電腦上的 <code>example</code> 目錄內操作：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token function">add</span> upstream https://github.com/<span class="token operator">&lt;</span>username<span class="token operator">></span>/<span class="token operator">&lt;</span>repo name<span class="token operator">></span>.git<span class="token function">git</span> remote set-url <span class="token parameter variable">--push</span> upstream DISABLE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>通常 repository 本身的 remote 會叫做 <code>origin</code>，現在多了一個 <code>upstream</code>，而這個 remote 移除了 push 功能，只留下 fetch。</p><p>這樣每次在 pull 的時候，就會同時從這兩個 remote 更新 commit，然後就能用 <code>merge</code> 或 <code>rebase</code> 等方法把原始 repository 的新功能加到自己的 repository。</p><h2 id="參考連接">參考連接</h2><ul><li><a href="https://gist.github.com/0xjac/85097472043b697ab57ba1b1c7530274">Create a private fork of a public repository</a></li><li><a href="https://hackmd.io/@hbdoy/BJz0V5tv8">Git Bare Repo - HackMD</a></li><li><a href="https://wyatthoho.medium.com/%E7%B7%B4%E7%BF%92%E4%B8%80%E4%B8%8Bgit-88b7a1411b57">Git 盲測！Bare 與 non-bare 倉儲的差異. Bare 倉儲是啥？能吃嗎？ | by wyatthoho | Medium</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技術筆記 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+            <tag> GitHub </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>在 Cloudflare 把服務遷移到新域名</title>
       <link href="/posts/migrate-services-to-new-domain-on-cloudflare/"/>
       <url>/posts/migrate-services-to-new-domain-on-cloudflare/</url>
