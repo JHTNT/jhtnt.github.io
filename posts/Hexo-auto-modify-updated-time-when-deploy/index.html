@@ -146,25 +146,25 @@
 <h2 id="為現有文章加上-updated">為現有文章加上 updated</h2>
 <p>若文章 front-matter 還沒有 <code>updated</code>，需要手動加入，可以直接複製 <code>date: xxxx-xx-xx xx:xx:xx</code> 這行，然後把 <code>date</code> 改成 <code>updated</code> 就好（之後執行程式會自動修正）。</p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
-<span class="token front-matter yaml language-yaml"><span class="token key atrule">title</span><span class="token punctuation">:</span> 在 Hexo 部署時自動更新文章的編輯時間
-<span class="token key atrule">date</span><span class="token punctuation">:</span> <span class="token datetime number">2023-01-18 15:09:05</span>
-<span class="token key atrule">updated</span><span class="token punctuation">:</span> <span class="token datetime number">2023-01-20 21:33:18</span>
-<span class="token key atrule">categories</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> 架站筆記
-<span class="token key atrule">tags</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> Hexo
-  <span class="token punctuation">-</span> JavaScript</span>
+<span class="token front-matter yaml language-yaml">title: 在 Hexo 部署時自動更新文章的編輯時間
+date: 2023-01-18 15:09:05
+updated: 2023-01-20 21:33:18
+categories:
+  - 架站筆記
+tags:
+  - Hexo
+  - JavaScript</span>
 <span class="token punctuation">---</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="修改模板">修改模板</h2>
 <p>我們當然不會想要每次都手動加上 <code>updated</code>，因此需要修改模版的 front-matter：</p>
 <pre class="line-numbers language-markdown" data-language="markdown"><div class="caption"><span>post.md</span></div><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
-<span class="token front-matter yaml language-yaml"><span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> title <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-<span class="token key atrule">date</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> date <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-<span class="token key atrule">updated</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> date <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-<span class="token key atrule">categories</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> 
-<span class="token key atrule">tags</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span></span> 
+<span class="token front-matter yaml language-yaml">title: &#123;&#123; title &#125;&#125;
+date: &#123;&#123; date &#125;&#125;
+updated: &#123;&#123; date &#125;&#125;
+categories:
+  - 
+tags:
+  -</span> 
 <span class="token punctuation">---</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>這樣以後生成新文章就會自動加上 <code>updated</code> 了。</p>
 <h2 id="自動修改更新日期">自動修改更新日期</h2>
