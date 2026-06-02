@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>解決 Windows 上常用 port 被大量佔用的問題</title>
+      <link href="/posts/fixing-common-windows-ports-being-reserved/"/>
+      <url>/posts/fixing-common-windows-ports-being-reserved/</url>
+      
+        <content type="html"><![CDATA[<p>在 Windows 上開發時，可能會遇到某些常用 port 無法使用，但是用 <code>netstat</code> 又查不到被什麼程式佔用：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">netstat <span class="token operator">-</span>ano <span class="token punctuation">|</span> findstr :1455<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>從<a href="https://blog.darkthread.net/blog/clear-reserved-tcp-port-ranges/">這篇文章</a>看到應該是這個 port 被保留了，之前遇到相同問題是使用<a href="https://blog.miniasp.com/post/2019/03/31/Ports-blocked-by-Windows-10-for-unknown-reason">另一篇文章</a>的方法，把自己要用的 port 從排除範圍刪掉，再重啟 WinNAT 釋放 port：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">netsh interface ipv4 delete excludedportrange protocol=tcp startport=3000 numberofports=1net stop winnatnet <span class="token function">start</span> winnat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="查看動態-port-範圍">查看動態 port 範圍</h2><p>這次先用 <code>netsh interface ipv4 show excludedportrange protocol=tcp</code> 查看有哪些 port 被排除：</p><pre class="line-numbers language-none"><code class="language-none">通訊協定 tcp 連接埠排除範圍開始連接埠    結束連接埠----------    ----------      1046        1145      1146        1245      1246        1345      1346        1445      1446        1545      1546        1645      1647        1746      1752        1851      1921        2020      2869        2869      3000        3000     *      4500        4500     *      5357        5357     50000       50059     ** - 管理的連接埠排除。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>接著用 <code>netsh int ipv4 show dynamicport tcp</code> 查看實際被劃定的範圍：</p><pre class="line-numbers language-none"><code class="language-none">通訊協定 tcp 動態連接埠範圍---------------------------------開始連接埠        : 1024連接埠數目        : 13977<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>發現這些動態 port 範圍很低，很容易讓常用的 port 被佔用。</p><h2 id="原因">原因</h2><p>根據<a href="https://zhaoji.wang/solve-the-problem-of-windows-10-ports-being-randomly-reserved-occupied-by-hyper-v/">這篇文章</a>所說，安裝了 <strong>Hyper-V</strong> 之後，它會為 Host Networking Service (HNS) 隨機保留一些 port 使用。</p><p>但現在的 Windows 系統預設會保留 49152 ~ 65535 這段 port，即使一部分被隨機佔用也不會有太大的影響。</p><p>然後又因為某些原因導致起始 port 被重置成 1024（是不是 Windows 更新造成的沒有找到準確來源）。</p><h2 id="修改動態-port-範圍">修改動態 port 範圍</h2><p>要修改動態 port 的範圍，需要以系統管理員身分開啟 PowerShell 執行以下指令：</p><pre class="line-numbers language-none"><code class="language-none">netsh int ipv4 set dynamicport tcp start&#x3D;49152 num&#x3D;16384<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>接著重新開機即可，也可以透過重啟 WinNAT 先暫時釋放 port：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">net stop winnatnet <span class="token function">start</span> winnat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h2 id="參考連結">參考連結</h2><ul><li><a href="https://blog.darkthread.net/blog/clear-reserved-tcp-port-ranges/">【茶包射手筆記】清除 Windows TCP Port 保留區段-黑暗執行緒</a></li><li><a href="https://blog.miniasp.com/post/2019/03/31/Ports-blocked-by-Windows-10-for-unknown-reason">Windows 10 無法 LISTEN Port 4200 與 Port 3000 的靈異事件整理 | The Will Will Web</a></li><li><a href="https://zhaoji.wang/solve-the-problem-of-windows-10-ports-being-randomly-reserved-occupied-by-hyper-v/">解决 Windows 10 端口被 Hyper-V 随机保留（占用）的问题 | 一个兆基</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 疑難雜症 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Windows </tag>
+            
+            <tag> Network </tag>
+            
+            <tag> Hyper-V </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>透過 Bare Clone 將 GitHub 的 Fork 專案轉為私人</title>
       <link href="/posts/convert-github-fork-to-private-repo/"/>
       <url>/posts/convert-github-fork-to-private-repo/</url>
